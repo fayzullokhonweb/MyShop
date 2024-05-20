@@ -18,7 +18,25 @@ const productsSlice = createSlice({
       } else {
         state.products.push(payload);
       }
+
+      productsSlice.caseReducers.calculateTotal(state);
+      console.log(state.products);
     },
-    removeProduct:(state,{payload})=>{}
+    removeProduct: (state, { payload }) => {},
+    calculateTotal: (state) => {
+      let price = 0;
+      let amount = 0;
+
+      state.products.forEach((item) => {
+        price += item.price * item.amount;
+        amount += item.amount;
+      });
+
+      state.amount = amount;
+      state.price = price;
+    },
   },
 });
+
+export const { addProduct, removeProduct } = productsSlice.actions;
+export default productsSlice.reducer;

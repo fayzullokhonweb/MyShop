@@ -1,6 +1,8 @@
 import { useLoaderData } from "react-router-dom";
 import { customFetch } from "../utils/index";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../features/productsSlice";
 
 export const loader = async ({ params }) => {
   const req = await customFetch(`/products/${params.id}`);
@@ -9,6 +11,8 @@ export const loader = async ({ params }) => {
 };
 
 function Product() {
+  const dispatch = useDispatch();
+
   const { product } = useLoaderData();
   const [productAmount, setProductAmount] = useState(1);
 
@@ -25,28 +29,22 @@ function Product() {
       ...product,
       amount: productAmount,
     };
+    dispatch(addProduct(newProduct));
   };
 
   return (
-    <div
-      key={product.id}
-      className="max-w-6xl mx-auto flex flex-col items-start w-full"
-    >
+    <div className="max-w-6xl mx-auto flex flex-col items-start w-full">
       <h1 className="text-3xl font-bold ">{product.title}</h1>
-      <div
-        key={product.id}
-        className="carousel carousel-center max-w-4xl w-full  mx-auto p-4 space-x-4 bg-neutral rounded-box mb-3"
-      >
+      <div className="carousel carousel-center max-w-4xl w-full  mx-auto p-4 space-x-4 bg-neutral rounded-box mb-3">
         {product.images.map((image) => {
-          console.log(image);
           return (
-            <div className="carousel-item ">
+            <div key={image} className="carousel-item ">
               <img src={image} className="rounded-box h-96 " />
             </div>
           );
         })}
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 text-center">
         <button
           onClick={() => setAmount("increase")}
           className="btn btn-secondary"
@@ -54,7 +52,7 @@ function Product() {
         >
           +
         </button>
-        <h2>{productAmount}</h2>
+        <h2 className="w-4">{productAmount}</h2>
         <button
           onClick={() => setAmount("decrease")}
           className="btn btn-secondary"

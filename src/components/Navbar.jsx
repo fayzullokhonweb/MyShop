@@ -2,7 +2,10 @@ import { Link, NavLink } from "react-router-dom";
 import { MdShoppingCart } from "react-icons/md";
 import NavLinks from "./NavLinks";
 
+import { useSelector } from "react-redux";
+
 function Navbar() {
+  const { amount } = useSelector((state) => state.products);
   return (
     <div className="bg-base-300 mb-10">
       <div className="max-w-6xl mx-auto navbar">
@@ -20,7 +23,7 @@ function Navbar() {
           <Link to="/cart">
             <div className="indicator cursor-pointer group">
               <span className="indicator-item badge badge-primary group-hover:badge-secondary">
-                9
+                {amount}
               </span>
               <MdShoppingCart className="w-7 h-7 text-secondary group-hover:text-primary transition duration-400" />
             </div>

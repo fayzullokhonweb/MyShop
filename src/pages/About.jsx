@@ -2,7 +2,6 @@ function About() {
   return (
     <div>
       <h1>About</h1>
-      <h3>dcvdfv</h3>
       <p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quo,
         perferendis, hic commodi alias earum cumque atque et quos at iste error
