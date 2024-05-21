@@ -7,7 +7,6 @@ import { GoPlus } from "react-icons/go";
 
 import { FiMinus } from "react-icons/fi";
 
-
 export const loader = async ({ params }) => {
   const req = await customFetch(`/products/${params.id}`);
   const product = req.data;
@@ -51,17 +50,18 @@ function Product() {
       <div className="flex items-center gap-2 text-center">
         <div className=" flex items-center gap-2 border-2 border-slate-200 p-2 rounded-md">
           <button
-            onClick={() => setAmount("increase")}
-            disabled={productAmount == 11 ? true : false}
-          >
-            <GoPlus className="w-7 h-7" />
-          </button>
-          <h2 className="w-4">{productAmount}</h2>
-          <button
             onClick={() => setAmount("decrease")}
             disabled={productAmount == 1 ? true : false}
           >
             <FiMinus className="w-6 h-6" />
+          </button>
+
+          <h2 className="w-4">{productAmount}</h2>
+          <button
+            onClick={() => setAmount("increase")}
+            disabled={productAmount == 11 ? true : false}
+          >
+            <GoPlus className="w-7 h-7" />
           </button>
         </div>
         <hr />
