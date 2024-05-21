@@ -14,7 +14,7 @@ export const loader = async () => {
 
 function Home() {
   return (
-    <div>
+    <div className="pb-4">
       <ProductsList />
     </div>
   );
